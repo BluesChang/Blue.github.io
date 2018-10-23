@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>BlueCode</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://blueschang.github.io/"/>
+  <updated>2018-10-23T03:14:30.978Z</updated>
+  <id>https://blueschang.github.io/</id>
+  
+  <author>
+    <name>BluesChang</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>first</title>
+    <link href="https://blueschang.github.io/2018/10/23/first/"/>
+    <id>https://blueschang.github.io/2018/10/23/first/</id>
+    <published>2018-10-23T03:14:30.000Z</published>
+    <updated>2018-10-23T03:14:30.978Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>

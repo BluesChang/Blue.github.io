@@ -1464,3 +1464,17 @@ em.search-keyword {
   list-style: none; }
   .post-copyright li {
     margin: 8px 0; }
+
+.recommended_posts {
+  padding: 0.5em 1em;
+  border-left: 3px solid #00CCFF;
+  background-color: #F9F9F9; }
+  .recommended_posts li {
+    margin: 5px 0; }
+  .recommended_posts a:link {
+    color: #0066FF; }
+  .recommended_posts a:hover {
+    text-decoration: underline;
+    color: red; }
+  .recommended_posts a:visited {
+    color: #00FF99; }
