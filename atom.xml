@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blueschang.github.io/"/>
-  <updated>2018-10-29T14:47:11.327Z</updated>
+  <updated>2018-10-30T06:55:45.852Z</updated>
   <id>https://blueschang.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>李宏毅机器学习-Regression</title>
+    <link href="https://blueschang.github.io/2018/10/30/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-Regression/"/>
+    <id>https://blueschang.github.io/2018/10/30/李宏毅机器学习-Regression/</id>
+    <published>2018-10-30T01:34:23.000Z</published>
+    <updated>2018-10-30T06:55:45.852Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://blueschang.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="李宏毅 机器学习" scheme="https://blueschang.github.io/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>李宏毅机器学习-Introduction of Machine Learning</title>
@@ -47,7 +73,7 @@
     <link href="https://blueschang.github.io/2018/10/29/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%AC%94%E8%AE%B0%E4%BC%A0%E9%80%81%E9%97%A8/"/>
     <id>https://blueschang.github.io/2018/10/29/李宏毅机器学习-笔记传送门/</id>
     <published>2018-10-29T09:40:23.000Z</published>
-    <updated>2018-10-29T14:47:17.295Z</updated>
+    <updated>2018-10-30T01:47:44.000Z</updated>
     
     <summary type="html">
     
