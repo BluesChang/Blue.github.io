@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>李宏毅机器学习-Gradient Descent | BlueCode</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create','UA-76546459-1','auto');ga('send','pageview');
+</script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">李宏毅机器学习-Gradient Descent</h1><a id="logo" href="/.">BlueCode</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/donate/"><i class="fa fa-cny"> 赞助</i></a><a href="/app/"><i class="fa fa-adn"> 软件</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">李宏毅机器学习-Gradient Descent</h1><div class="post-meta">Oct 31, 2018<span> | </span><span class="category"><a href="/categories/机器学习/">机器学习</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 748</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 2</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" data-disqus-identifier="2018/10/31/李宏毅机器学习-Gradient Descent/" href="/2018/10/31/李宏毅机器学习-Gradient Descent/#disqus_thread"></a><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Review"><span class="toc-number">1.</span> <span class="toc-text">Review</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tip-1-Tuning-your-learning-rates"><span class="toc-number">2.</span> <span class="toc-text">Tip 1: Tuning your learning rates</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Adaptive-Learning-Rates"><span class="toc-number">2.1.</span> <span class="toc-text">Adaptive Learning Rates</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Adagrad"><span class="toc-number">2.2.</span> <span class="toc-text">Adagrad</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tip-2-Stochastic-Gradient-Descent：Make-the-training-faster"><span class="toc-number">3.</span> <span class="toc-text">Tip 2: Stochastic Gradient Descent：Make the training faster</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tip-3-Feature-Scaling"><span class="toc-number">4.</span> <span class="toc-text">Tip 3: Feature Scaling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Formal-Derivation"><span class="toc-number">5.</span> <span class="toc-text">Formal Derivation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#More-Limitation-of-Gradient-Descent"><span class="toc-number">6.</span> <span class="toc-text">More Limitation of Gradient Descent</span></a></li></ol></div></div><div class="post-content"><p>本章课程<a href="http://101.96.10.63/speech.ee.ntu.edu.tw/~tlkagk/courses/ML_2016/Lecture/Gradient%20Descent%20%28v2%29.pdf" target="_blank" rel="noopener">PDF</a>，视频（<a href="https://www.youtube.com/watch?v=yKKNr-QKz2Q&amp;list=PLJV_el3uVTsPy9oCRY30oBPNLCo89yu49&amp;index=6" target="_blank" rel="noopener">油管</a>或<a href="https://www.bilibili.com/video/av10590361/?p=6" target="_blank" rel="noopener">B站</a>）。</p>
+<h3 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h3><p><em>Gradient Descent</em>算法流程如下图：<img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwri62gt1aj21b80s8tfh.jpg" alt=""></p>
+<p>流程可视化效果如下图：<img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwri7p0qzaj21f40syn38.jpg" alt=""></p>
+<h3 id="Tip-1-Tuning-your-learning-rates"><a href="#Tip-1-Tuning-your-learning-rates" class="headerlink" title="Tip 1: Tuning your learning rates"></a>Tip 1: Tuning your learning rates</h3><p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwric4u7quj21ec10ygt3.jpg" alt=""></p>
+<p>learning rate太小，loss值下降会很慢，如图左蓝色线；learning rate比较大，loss值有可能会卡在一个地方，如图左绿色曲线，learning rate很大，loss值有可能变大，如图左红色曲线。</p>
+<p>可以可视化learning rate与loss值的关系，如图右所示。在做Gradient Descent时候建议画出此图，可以更好的选择learning rate。</p>
+<h4 id="Adaptive-Learning-Rates"><a href="#Adaptive-Learning-Rates" class="headerlink" title="Adaptive Learning Rates"></a>Adaptive Learning Rates</h4><p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwriiv88nsj219e0o4tdi.jpg" alt=""></p>
+<p>为了达到以上目的，有很多技巧，比如Adagrad。</p>
+<h4 id="Adagrad"><a href="#Adagrad" class="headerlink" title="Adagrad"></a>Adagrad</h4><p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrist8zrxj21cs11cgs0.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrisxwbd1j21eu136dlv.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrit2saftj21880sutcy.jpg" alt=""></p>
+<p>此时，可能会发现一个矛盾，在做一般的Gradient Descent中，参数的update取决于两件事情，一件事情是learning rate，另一件事情是gradient。gradient越大，参数update就越快。在Adagrad中，gradient越大，分母就会越大，正好与gradient对参数update的影响相反，如图所示。<img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrj25005ij21b40pktcl.jpg" alt=""></p>
+<p>其实，Adagrad如此处理，直觉上来讲，是为了突出<em>反差</em>的效果。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrj83h3x7j219s0rygpm.jpg" alt=""></p>
+<p>更正式的解释是这样：<img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrldz98mqj21fy0yaagm.jpg" alt=""></p>
+<p>只考虑一个参数的时候，调整的best step与一次微分有关。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrlf01iccj21g211y4qp.jpg" alt=""></p>
+<p>考虑两个参数的时候，可以看出$w_1$上的a点的微分值是比较小的，$w_2$上的c点的微分值是比较大的，但是可以明显看出，a点离最低点是比较远的，c点离最低点是比较近的。所以，考虑跨参数的时候，就不能仅仅只考虑一次微分值。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrlkfu2i8j21ek0z0n3d.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02ly1fwrlprf6fdj21de122qau.jpg" alt=""></p>
+<p>同时考虑多个参数的时候，调整的best step与一次微分和二次微分有关。Adagrad的做法是在没有额外多余的运算下估算二次微分。</p>
+<h3 id="Tip-2-Stochastic-Gradient-Descent：Make-the-training-faster"><a href="#Tip-2-Stochastic-Gradient-Descent：Make-the-training-faster" class="headerlink" title="Tip 2: Stochastic Gradient Descent：Make the training faster"></a>Tip 2: Stochastic Gradient Descent：Make the training faster</h3><p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrm0vxi6yj21dc0uitej.jpg" alt=""></p>
+<p>正常的Gradient Descent，Loss是考虑所有的training example，Stochastic Gradient Descent的Loss只考虑某一个example。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02ly1fwrm4hpy9kj21eq0tyapn.jpg" alt=""></p>
+<p>从Demo中可以看出，Gradient Descent看过所有的example后update一次参数，是比较稳定的；Stochastic Gradient Descent每看到一个example后就update一次参数，是比较散乱的，但是速度是比较快的。</p>
+<h3 id="Tip-3-Feature-Scaling"><a href="#Tip-3-Feature-Scaling" class="headerlink" title="Tip 3: Feature Scaling"></a>Tip 3: Feature Scaling</h3><p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrmefdv1rj21920s6thr.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrmejequoj21g00zsjz6.jpg" alt=""></p>
+<p><em>Feature Scaling</em>是为了让特征有相同的分布。</p>
+<p>e.g.假设$y=b+w_1x_1+w_2x_2$中$x_1$的值是比较小的（1，2……），$x_2$的值是比较大的（100，200……），对$w_1$、$w_2$的值做相同的变化，会发现$w_1$对$y$的变化是比较小的，$w_2$对$y$的变化是比较大的。因此可以画出蓝色圈圈的图， 在$w_1$方向上是比较smooth的，在$w_2$方向上是比较sharp的，这时候update参数是比较难的。经过Feature Scaling处理后，可以得到绿色圈圈的图，这时候update参数是比较容易，比较有效率的。</p>
+<p>常用的Feature Scaling方法之一如图所示：</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02ly1fwrmqawhb3j21ci0qy79m.jpg" alt=""></p>
+<h3 id="Formal-Derivation"><a href="#Formal-Derivation" class="headerlink" title="Formal Derivation"></a>Formal Derivation</h3><p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrn1uy460j21d20ue1kx.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrn272uivj21a00q8jvp.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrn2xurkaj21ds0w8jwn.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrn3lzeczj21em0uwqoj.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrn4364buj21du0vqh7j.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrn5y6c6qj21cw0ya7bc.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrn6aw8jij21gc0uutgh.jpg" alt=""></p>
+<h3 id="More-Limitation-of-Gradient-Descent"><a href="#More-Limitation-of-Gradient-Descent" class="headerlink" title="More Limitation of Gradient Descent"></a>More Limitation of Gradient Descent</h3><p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwrnckku5lj21dk0u07l8.jpg" alt=""></p>
+<p>Gradient Descent可能会卡在local minima，也可能会卡在saddle point，也有可能是卡在微分值很小的plateau。</p>
+<p><em>如果本博文对您有帮助，可以<a href="https://blueschang.github.io/donate/">赞助</a>支持一波博主~</em></p>
+</div><div class="recommended_posts"><h3>推荐阅读</h3><li><a href="https://blueschang.github.io/2018/10/30/李宏毅机器学习-Where does the error come from/" target="_blank">李宏毅机器学习-Where does the error come from?</a></li><li><a href="https://blueschang.github.io/2018/10/30/李宏毅机器学习-Regression/" target="_blank">李宏毅机器学习-Regression</a></li><li><a href="https://blueschang.github.io/2018/10/29/李宏毅机器学习-Introduction of Machine Learning/" target="_blank">李宏毅机器学习-Introduction of Machine Learning</a></li><li><a href="https://blueschang.github.io/2018/10/29/李宏毅机器学习-笔记传送门/" target="_blank">李宏毅机器学习-笔记传送门</a></li></div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>BluesChang</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/2018/10/31/李宏毅机器学习-Gradient Descent/">https://blueschang.github.io/2018/10/31/李宏毅机器学习-Gradient Descent/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a> 许可协议。转载请注明出处！</li></ul></div><br><div class="tags"><a href="/tags/李宏毅-机器学习/">李宏毅 机器学习</a></div><div class="post-nav"><a class="next" href="/2018/10/30/李宏毅机器学习-Where does the error come from/">李宏毅机器学习-Where does the error come from?</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论（请确保 Disqus 可以正常加载）</button></div><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'https://blueschang.github.io/2018/10/31/李宏毅机器学习-Gradient Descent/';
+    this.page.identifier = '2018/10/31/李宏毅机器学习-Gradient Descent/';
+    this.page.title = '李宏毅机器学习-Gradient Descent';
+  };</script><script type="text/javascript" id="disqus-lazy-load-script">$.ajax({
+url: 'https://disqus.com/next/config.json',
+timeout: 2500,
+type: 'GET',
+success: function(){
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//bluecode-1.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+  $('.disqus_click_btn').css('display', 'none');
+},
+error: function() {
+  $('.disqus_click_btn').css('display', 'block');
+}
+});</script><script type="text/javascript" id="disqus-click-load">$('.btn_click_load').click(() => {  //click to load comments
+    (() => { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//bluecode-1.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    $('.disqus_click_btn').css('display','none');
+});</script><script type="text/javascript" id="disqus-count-script">$(function() {
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', '//disqus.com/next/config.json', true);
+     xhr.timeout = 2500;
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4 && xhr.status === 200) {
+         $('.post-meta .post-comments-count').show();
+         var s = document.createElement('script');
+         s.id = 'dsq-count-scr';
+         s.src = 'https://bluecode-1.disqus.com/count.js';
+         s.async = true;
+         (document.head || document.body).appendChild(s);
+       }
+     };
+     xhr.ontimeout = function () { xhr.abort(); };
+     xhr.send(null);
+   });
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://blueschang.github.io"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/">机器学习</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Hexo-Github-博客/" style="font-size: 15px;">Hexo Github 博客</a> <a href="/tags/李宏毅-机器学习/" style="font-size: 15px;">李宏毅 机器学习</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/10/31/李宏毅机器学习-Gradient Descent/">李宏毅机器学习-Gradient Descent</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/李宏毅机器学习-Where does the error come from/">李宏毅机器学习-Where does the error come from?</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/李宏毅机器学习-Regression/">李宏毅机器学习-Regression</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/李宏毅机器学习-Introduction of Machine Learning/">李宏毅机器学习-Introduction of Machine Learning</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/李宏毅机器学习-笔记传送门/">李宏毅机器学习-笔记传送门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/25/Hexo+Github搭建博客指南/">Hexo+Github搭建博客指南</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://toaco.github.io/" title="Jeffrey‘s Blog" target="_blank">Jeffrey‘s Blog</a><ul></ul><a href="https://coder-wen.github.io/" title="coderwen的踩坑日记" target="_blank">coderwen的踩坑日记</a><ul></ul><a href="https://me.csdn.net/taoyafan" title="taoyafan" target="_blank">taoyafan</a><ul></ul><a href="https://smilexnan.github.io/" title="SmileCode" target="_blank">SmileCode</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">BlueCode.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" color="0,0,0" opacity="0.5" zIndex="-2" count="50" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script><script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML" async></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

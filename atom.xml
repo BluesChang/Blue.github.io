@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blueschang.github.io/"/>
-  <updated>2018-10-31T08:12:29.373Z</updated>
+  <updated>2018-10-31T11:51:40.547Z</updated>
   <id>https://blueschang.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>李宏毅机器学习-Gradient Descent</title>
+    <link href="https://blueschang.github.io/2018/10/31/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-Gradient%20Descent/"/>
+    <id>https://blueschang.github.io/2018/10/31/李宏毅机器学习-Gradient Descent/</id>
+    <published>2018-10-31T08:34:00.000Z</published>
+    <updated>2018-10-31T11:51:40.547Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://blueschang.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="李宏毅 机器学习" scheme="https://blueschang.github.io/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>李宏毅机器学习-Where does the error come from?</title>
