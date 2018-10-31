@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blueschang.github.io/"/>
-  <updated>2018-10-31T11:51:40.547Z</updated>
+  <updated>2018-10-31T12:02:18.729Z</updated>
   <id>https://blueschang.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>李宏毅机器学习-Gradient Descent</title>
-    <link href="https://blueschang.github.io/2018/10/31/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-Gradient%20Descent/"/>
-    <id>https://blueschang.github.io/2018/10/31/李宏毅机器学习-Gradient Descent/</id>
+    <title>「李宏毅机器学习」学习笔记-Gradient Descent</title>
+    <link href="https://blueschang.github.io/2018/10/31/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Gradient%20Descent/"/>
+    <id>https://blueschang.github.io/2018/10/31/「李宏毅机器学习」学习笔记-Gradient Descent/</id>
     <published>2018-10-31T08:34:00.000Z</published>
-    <updated>2018-10-31T11:51:40.547Z</updated>
+    <updated>2018-10-31T12:02:18.729Z</updated>
     
     <summary type="html">
     
@@ -43,11 +43,11 @@
   </entry>
   
   <entry>
-    <title>李宏毅机器学习-Where does the error come from?</title>
-    <link href="https://blueschang.github.io/2018/10/30/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-Where%20does%20the%20error%20come%20from/"/>
-    <id>https://blueschang.github.io/2018/10/30/李宏毅机器学习-Where does the error come from/</id>
+    <title>「李宏毅机器学习」学习笔记-Where does the error come from?</title>
+    <link href="https://blueschang.github.io/2018/10/30/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Where%20does%20the%20error%20come%20from/"/>
+    <id>https://blueschang.github.io/2018/10/30/「李宏毅机器学习」学习笔记-Where does the error come from/</id>
     <published>2018-10-30T09:05:03.000Z</published>
-    <updated>2018-10-31T08:12:29.373Z</updated>
+    <updated>2018-10-31T12:02:04.424Z</updated>
     
     <summary type="html">
     
@@ -69,11 +69,11 @@
   </entry>
   
   <entry>
-    <title>李宏毅机器学习-Regression</title>
-    <link href="https://blueschang.github.io/2018/10/30/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-Regression/"/>
-    <id>https://blueschang.github.io/2018/10/30/李宏毅机器学习-Regression/</id>
+    <title>「李宏毅机器学习」学习笔记-Regression</title>
+    <link href="https://blueschang.github.io/2018/10/30/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Regression/"/>
+    <id>https://blueschang.github.io/2018/10/30/「李宏毅机器学习」学习笔记-Regression/</id>
     <published>2018-10-30T01:34:23.000Z</published>
-    <updated>2018-10-31T08:15:31.623Z</updated>
+    <updated>2018-10-31T12:02:13.961Z</updated>
     
     <summary type="html">
     
@@ -95,11 +95,11 @@
   </entry>
   
   <entry>
-    <title>李宏毅机器学习-Introduction of Machine Learning</title>
-    <link href="https://blueschang.github.io/2018/10/29/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-Introduction%20of%20Machine%20Learning/"/>
-    <id>https://blueschang.github.io/2018/10/29/李宏毅机器学习-Introduction of Machine Learning/</id>
+    <title>「李宏毅机器学习」学习笔记-Introduction of Machine Learning</title>
+    <link href="https://blueschang.github.io/2018/10/29/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Introduction%20of%20Machine%20Learning/"/>
+    <id>https://blueschang.github.io/2018/10/29/「李宏毅机器学习」学习笔记-Introduction of Machine Learning/</id>
     <published>2018-10-29T09:45:23.000Z</published>
-    <updated>2018-10-31T08:12:25.842Z</updated>
+    <updated>2018-10-31T12:01:22.210Z</updated>
     
     <summary type="html">
     
@@ -121,11 +121,11 @@
   </entry>
   
   <entry>
-    <title>李宏毅机器学习-笔记传送门</title>
+    <title>「李宏毅机器学习」学习笔记传送门</title>
     <link href="https://blueschang.github.io/2018/10/29/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%AC%94%E8%AE%B0%E4%BC%A0%E9%80%81%E9%97%A8/"/>
     <id>https://blueschang.github.io/2018/10/29/李宏毅机器学习-笔记传送门/</id>
     <published>2018-10-29T09:40:23.000Z</published>
-    <updated>2018-10-31T08:24:41.625Z</updated>
+    <updated>2018-10-31T12:02:52.714Z</updated>
     
     <summary type="html">
     

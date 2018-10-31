@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>「李宏毅机器学习」学习笔记-Where does the error come from? | BlueCode</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create','UA-76546459-1','auto');ga('send','pageview');
+</script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">「李宏毅机器学习」学习笔记-Where does the error come from?</h1><a id="logo" href="/.">BlueCode</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/donate/"><i class="fa fa-cny"> 赞助</i></a><a href="/app/"><i class="fa fa-adn"> 软件</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">「李宏毅机器学习」学习笔记-Where does the error come from?</h1><div class="post-meta">Oct 30, 2018<span> | </span><span class="category"><a href="/categories/机器学习/">机器学习</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 678</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 2</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" data-disqus-identifier="2018/10/30/「李宏毅机器学习」学习笔记-Where does the error come from/" href="/2018/10/30/「李宏毅机器学习」学习笔记-Where does the error come from/#disqus_thread"></a><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bias-and-Variance-of-Estimator"><span class="toc-number">1.</span> <span class="toc-text">Bias and Variance of Estimator</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Variance"><span class="toc-number">2.</span> <span class="toc-text">Variance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bias"><span class="toc-number">3.</span> <span class="toc-text">Bias</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bias-v-s-Variance"><span class="toc-number">4.</span> <span class="toc-text">Bias v.s. Variance</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#What-to-do-with-large-bias？"><span class="toc-number">4.1.</span> <span class="toc-text">What to do with large bias？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#What-to-do-with-large-variance？"><span class="toc-number">4.2.</span> <span class="toc-text">What to do with large variance？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Model-Selection"><span class="toc-number">5.</span> <span class="toc-text">Model Selection</span></a></li></ol></div></div><div class="post-content"><p>本章课程视频（<a href="https://www.youtube.com/watch?v=D_S6y0Jm6dQ&amp;list=PLJV_el3uVTsPy9oCRY30oBPNLCo89yu49&amp;index=5" target="_blank" rel="noopener">油管</a>或<a href="https://www.bilibili.com/video/av10590361/?p=5" target="_blank" rel="noopener">B站</a>）。</p>
+<p>选择不同的function set，会有不同的model，会在testing data上得到不同的error，越复杂的model不见得会给你越低的error。不同的error有两个来源：bias、variance。</p>
+<h3 id="Bias-and-Variance-of-Estimator"><a href="#Bias-and-Variance-of-Estimator" class="headerlink" title="Bias and Variance of Estimator"></a>Bias and Variance of Estimator</h3><p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwqdxcc7jkj21860s478u.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwqdxv0njzj21co0uctdv.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwqdyw3k8hj21ao0tc792.jpg" alt=""></p>
+<h3 id="Variance"><a href="#Variance" class="headerlink" title="Variance"></a>Variance</h3><p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwqewgq2ffj21fg0uqwye.jpg" alt=""></p>
+<p>比较简单的model，variance比较小；比较复杂的model，variance比较大。</p>
+<p>简单的model受sampled data的影响比较小。例如$f(x)=c$不管用什么数据训练，它的variance都是0。</p>
+<h3 id="Bias"><a href="#Bias" class="headerlink" title="Bias"></a>Bias</h3><p><em>Bias</em>：If we average all the $f^*$,is it close to $\hat{f}$.</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwqissyx0ej21bc0m0dqr.jpg" alt=""></p>
+<p>在图中，$f^*$是靶中蓝色的点，$\hat{f}$是红色靶心。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwqffwfcphj21f80oo14m.jpg" alt=""></p>
+<p>黑色曲线：实际function $\hat{f}$</p>
+<p>红色曲线：5000$f^*$</p>
+<p>蓝色曲线：5000$f^*$的平均值=$\bar{f}$</p>
+<p>从图中可以看出，一个比较简单的model，会有比较大的bias；一个比较复杂的model，会有比较小的bias。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwqfnk0rg1j21a20cagv1.jpg" alt=""></p>
+<p>我们的model就是一个function set，可以用上图中蓝色圈圈表示。如果是一个简单的model，就如图中左边蓝色圈圈一样，因为是一个简单的model，它的空间就比较小，有可能空间就没包含target。如果是一个复杂的model，就如图中右边蓝色圈圈一样，空间比较大，可能包含了target，但因为给的training data不够，它没有办法找出target在哪，所以每次找出的$f^*$不一样，正好散布在target附近，平均起来就可以得到$\bar{f}$。</p>
+<h3 id="Bias-v-s-Variance"><a href="#Bias-v-s-Variance" class="headerlink" title="Bias v.s. Variance"></a>Bias v.s. Variance</h3><p><img src="https://ws1.sinaimg.cn/large/d1566b02ly1fwqg0faea2j21ee0uywp4.jpg" alt=""></p>
+<p>比较简单的model的bias比较大variance比较小，比较复杂的model的bias比较小variance比较大。</p>
+<p>如果这时error来源于variance很大，这时就是Overfitting，如果这时error来源于bias很大，这时就是Underfitting。</p>
+<p>如果你的model没有办法fit你的training examples，说明此时bias大，如果你的model可以fit你的training data，但是在testing data上得到大的error，说明此时variance大。</p>
+<h4 id="What-to-do-with-large-bias？"><a href="#What-to-do-with-large-bias？" class="headerlink" title="What to do with large bias？"></a>What to do with large bias？</h4><p>Redesign your model:</p>
+<ul>
+<li><p>Add more features as input</p>
+</li>
+<li><p>A more complex model</p>
+</li>
+</ul>
+<h4 id="What-to-do-with-large-variance？"><a href="#What-to-do-with-large-variance？" class="headerlink" title="What to do with large variance？"></a>What to do with large variance？</h4><p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwqgewidaij21h00toqn1.jpg" alt=""></p>
+<h3 id="Model-Selection"><a href="#Model-Selection" class="headerlink" title="Model Selection"></a>Model Selection</h3><p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwqhcnoxwsj21bw0r6jvg.jpg" alt=""></p>
+<p>在Testing Set上Error最小的并不代表效果最好，因为并不代表在真正的Testing Set（real）上Error是小的。</p>
+<p>真正可靠的做法是这样：</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fwqhjkdaa7j21eo0x4n2v.jpg" alt=""></p>
+<p>将Training Set分为Training Set和Validation Set，Training Set用于训练Model，Validation Set用来选Model。这时候在Testing Set（pulic）的Error能真正反映在Testing Set（private）上的Error。但不建议根据在Testing Set（public）上的Error发过来影响Model。</p>
+<p>如果担心数据集划分不好，可以采取下边这种方法：<img src="https://ws1.sinaimg.cn/large/d1566b02ly1fwqhx3go64j21ce0yotde.jpg" alt=""></p>
+<p>将Training Set分成三份，三份数据集轮流当成Validation Set，分成不同的三组，用modle分别在三个情景下算Error，得到Average Error，选Average Error最小的modle。</p>
+<p><em>如果本博文对您有帮助，可以<a href="https://blueschang.github.io/donate/">赞助</a>支持一波博主~</em></p>
+</div><div class="recommended_posts"><h3>推荐阅读</h3><li><a href="https://blueschang.github.io/2018/10/31/「李宏毅机器学习」学习笔记-Gradient Descent/" target="_blank">「李宏毅机器学习」学习笔记-Gradient Descent</a></li><li><a href="https://blueschang.github.io/2018/10/30/「李宏毅机器学习」学习笔记-Regression/" target="_blank">「李宏毅机器学习」学习笔记-Regression</a></li><li><a href="https://blueschang.github.io/2018/10/29/「李宏毅机器学习」学习笔记-Introduction of Machine Learning/" target="_blank">「李宏毅机器学习」学习笔记-Introduction of Machine Learning</a></li><li><a href="https://blueschang.github.io/2018/10/29/李宏毅机器学习-笔记传送门/" target="_blank">「李宏毅机器学习」学习笔记传送门</a></li></div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>BluesChang</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/2018/10/30/「李宏毅机器学习」学习笔记-Where does the error come from/">https://blueschang.github.io/2018/10/30/「李宏毅机器学习」学习笔记-Where does the error come from/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a> 许可协议。转载请注明出处！</li></ul></div><br><div class="tags"><a href="/tags/李宏毅-机器学习/">李宏毅 机器学习</a></div><div class="post-nav"><a class="pre" href="/2018/10/31/「李宏毅机器学习」学习笔记-Gradient Descent/">「李宏毅机器学习」学习笔记-Gradient Descent</a><a class="next" href="/2018/10/30/「李宏毅机器学习」学习笔记-Regression/">「李宏毅机器学习」学习笔记-Regression</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论（请确保 Disqus 可以正常加载）</button></div><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'https://blueschang.github.io/2018/10/30/「李宏毅机器学习」学习笔记-Where does the error come from/';
+    this.page.identifier = '2018/10/30/「李宏毅机器学习」学习笔记-Where does the error come from/';
+    this.page.title = '「李宏毅机器学习」学习笔记-Where does the error come from?';
+  };</script><script type="text/javascript" id="disqus-lazy-load-script">$.ajax({
+url: 'https://disqus.com/next/config.json',
+timeout: 2500,
+type: 'GET',
+success: function(){
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//bluecode-1.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+  $('.disqus_click_btn').css('display', 'none');
+},
+error: function() {
+  $('.disqus_click_btn').css('display', 'block');
+}
+});</script><script type="text/javascript" id="disqus-click-load">$('.btn_click_load').click(() => {  //click to load comments
+    (() => { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//bluecode-1.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    $('.disqus_click_btn').css('display','none');
+});</script><script type="text/javascript" id="disqus-count-script">$(function() {
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', '//disqus.com/next/config.json', true);
+     xhr.timeout = 2500;
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4 && xhr.status === 200) {
+         $('.post-meta .post-comments-count').show();
+         var s = document.createElement('script');
+         s.id = 'dsq-count-scr';
+         s.src = 'https://bluecode-1.disqus.com/count.js';
+         s.async = true;
+         (document.head || document.body).appendChild(s);
+       }
+     };
+     xhr.ontimeout = function () { xhr.abort(); };
+     xhr.send(null);
+   });
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://blueschang.github.io"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/">机器学习</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Hexo-Github-博客/" style="font-size: 15px;">Hexo Github 博客</a> <a href="/tags/李宏毅-机器学习/" style="font-size: 15px;">李宏毅 机器学习</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/10/31/「李宏毅机器学习」学习笔记-Gradient Descent/">「李宏毅机器学习」学习笔记-Gradient Descent</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/「李宏毅机器学习」学习笔记-Where does the error come from/">「李宏毅机器学习」学习笔记-Where does the error come from?</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/「李宏毅机器学习」学习笔记-Regression/">「李宏毅机器学习」学习笔记-Regression</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/「李宏毅机器学习」学习笔记-Introduction of Machine Learning/">「李宏毅机器学习」学习笔记-Introduction of Machine Learning</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/李宏毅机器学习-笔记传送门/">「李宏毅机器学习」学习笔记传送门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/25/Hexo+Github搭建博客指南/">Hexo+Github搭建博客指南</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://toaco.github.io/" title="Jeffrey‘s Blog" target="_blank">Jeffrey‘s Blog</a><ul></ul><a href="https://coder-wen.github.io/" title="coderwen的踩坑日记" target="_blank">coderwen的踩坑日记</a><ul></ul><a href="https://me.csdn.net/taoyafan" title="taoyafan" target="_blank">taoyafan</a><ul></ul><a href="https://smilexnan.github.io/" title="SmileCode" target="_blank">SmileCode</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">BlueCode.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" color="0,0,0" opacity="0.5" zIndex="-2" count="50" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script><script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML" async></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
