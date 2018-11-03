@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blueschang.github.io/"/>
-  <updated>2018-11-02T09:53:00.267Z</updated>
+  <updated>2018-11-03T03:01:03.990Z</updated>
   <id>https://blueschang.github.io/</id>
   
   <author>
@@ -17,11 +17,37 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>「李宏毅机器学习」学习笔记-Logistic Regression</title>
+    <link href="https://blueschang.github.io/2018/11/03/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Logistic%20Regression/"/>
+    <id>https://blueschang.github.io/2018/11/03/「李宏毅机器学习」学习笔记-Logistic Regression/</id>
+    <published>2018-11-03T01:23:40.000Z</published>
+    <updated>2018-11-03T03:01:03.990Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://blueschang.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="李宏毅 机器学习" scheme="https://blueschang.github.io/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>「李宏毅机器学习」学习笔记-Classification：Probabilistic Generative Model</title>
     <link href="https://blueschang.github.io/2018/11/02/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Classification/"/>
     <id>https://blueschang.github.io/2018/11/02/「李宏毅机器学习」学习笔记-Classification/</id>
     <published>2018-11-02T07:21:32.000Z</published>
-    <updated>2018-11-02T09:53:00.267Z</updated>
+    <updated>2018-11-03T03:01:02.374Z</updated>
     
     <summary type="html">
     
