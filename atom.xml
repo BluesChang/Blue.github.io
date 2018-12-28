@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blueschang.github.io/"/>
-  <updated>2018-12-27T09:41:54.000Z</updated>
+  <updated>2018-12-28T09:38:29.000Z</updated>
   <id>https://blueschang.github.io/</id>
   
   <author>
@@ -17,11 +17,37 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>「李宏毅机器学习」学习笔记-Support Vector Machine (SVM)</title>
+    <link href="https://blueschang.github.io/2018/12/28/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Unsupervised%20Learning%20-%20Support%20Vector%20Machine%20(SVM)/"/>
+    <id>https://blueschang.github.io/2018/12/28/「李宏毅机器学习」学习笔记-Unsupervised Learning - Support Vector Machine (SVM)/</id>
+    <published>2018-12-28T01:51:31.000Z</published>
+    <updated>2018-12-28T09:38:29.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://blueschang.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="李宏毅 机器学习" scheme="https://blueschang.github.io/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>「李宏毅机器学习」学习笔记-Transfer Learning</title>
     <link href="https://blueschang.github.io/2018/12/27/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Unsupervised%20Learning%20-%20Transfer%20Learning/"/>
     <id>https://blueschang.github.io/2018/12/27/「李宏毅机器学习」学习笔记-Unsupervised Learning - Transfer Learning/</id>
     <published>2018-12-27T02:28:20.000Z</published>
-    <updated>2018-12-27T09:41:54.000Z</updated>
+    <updated>2018-12-28T01:53:18.000Z</updated>
     
     <summary type="html">
     
@@ -490,32 +516,6 @@
     <id>https://blueschang.github.io/2018/10/30/「李宏毅机器学习」学习笔记-Regression/</id>
     <published>2018-10-30T01:34:23.000Z</published>
     <updated>2018-10-31T12:02:13.961Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          
-        
-      
-    
-    </summary>
-    
-      <category term="机器学习" scheme="https://blueschang.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="李宏毅 机器学习" scheme="https://blueschang.github.io/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>「李宏毅机器学习」学习笔记-Introduction of Machine Learning</title>
-    <link href="https://blueschang.github.io/2018/10/29/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Introduction%20of%20Machine%20Learning/"/>
-    <id>https://blueschang.github.io/2018/10/29/「李宏毅机器学习」学习笔记-Introduction of Machine Learning/</id>
-    <published>2018-10-29T09:45:23.000Z</published>
-    <updated>2018-10-31T12:01:22.210Z</updated>
     
     <summary type="html">
     
