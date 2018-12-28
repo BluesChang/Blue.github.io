@@ -1,0 +1,122 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>「李宏毅机器学习」学习笔记-Transfer Learning | BlueCode</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create','UA-76546459-1','auto');ga('send','pageview');
+</script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">「李宏毅机器学习」学习笔记-Transfer Learning</h1><a id="logo" href="/.">BlueCode</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/donate/"><i class="fa fa-cny"> 赞助</i></a><a href="/app/"><i class="fa fa-adn"> 软件</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">「李宏毅机器学习」学习笔记-Transfer Learning</h1><div class="post-meta">Dec 27, 2018<span> | </span><span class="category"><a href="/categories/机器学习/">机器学习</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><a class="disqus-comment-count" data-disqus-identifier="2018/12/27/「李宏毅机器学习」学习笔记-Unsupervised Learning - Transfer Learning/" href="/2018/12/27/「李宏毅机器学习」学习笔记-Unsupervised Learning - Transfer Learning/#disqus_thread"></a><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Why？"><span class="toc-number">1.</span> <span class="toc-text">Why？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transfer-Learning-Overview"><span class="toc-number">2.</span> <span class="toc-text">Transfer Learning - Overview</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Model-Fine-tuning"><span class="toc-number">3.</span> <span class="toc-text">Model Fine-tuning</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Conservative-Training"><span class="toc-number">3.1.</span> <span class="toc-text">Conservative Training</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Layer-Transfer"><span class="toc-number">3.2.</span> <span class="toc-text">Layer Transfer</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multitask-Learning"><span class="toc-number">4.</span> <span class="toc-text">Multitask Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Progressive-Neural-Networks"><span class="toc-number">5.</span> <span class="toc-text">Progressive Neural Networks</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Domain-adversarial-training"><span class="toc-number">6.</span> <span class="toc-text">Domain-adversarial training</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Task-description"><span class="toc-number">6.1.</span> <span class="toc-text">Task description</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Zero-shot-Learning"><span class="toc-number">7.</span> <span class="toc-text">Zero-shot Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Self-taught-learning"><span class="toc-number">8.</span> <span class="toc-text">Self-taught learning</span></a></li></ol></div></div><div class="post-content"><p>本章课程<a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses/ML_2016/Lecture/transfer%20%28v3%29.pdf" target="_blank" rel="noopener">PDF</a>，视频（<a href="https://www.youtube.com/watch?v=qD6iD4TFsdQ&amp;list=PLJV_el3uVTsPy9oCRY30oBPNLCo89yu49&amp;index=28" target="_blank" rel="noopener">油管</a>或<a href="https://www.bilibili.com/video/av10590361/?p=29" target="_blank" rel="noopener">B站</a>）。</p>
+<p>Transfer Learning要做的是：假设现在手上有与现在进行的task没有直接相关的data，使用这些data来帮助做一些事情。</p>
+<p>比如现在要做猫狗的分类器，所谓不直接相关的data就可能是 </p>
+<ul>
+<li>Similar domain, different tasks（大象与老虎的图片，与猫狗图片的分布是相像的） </li>
+<li>Different domain, same task（猫狗的卡通图片，与猫狗图片的分布是不像的）</li>
+</ul>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylar5otnhj20oc0iqjzd.jpg" alt=""></p>
+<h3 id="Why？"><a href="#Why？" class="headerlink" title="Why？"></a>Why？</h3><p>为什么考虑transfer learning？因为我们只有很少的数据是符合任务处理要求的（Target Data），但是类似的数据（Source Data）却有很多。例如，我们的任务是辨识台语，我们只有很少台语数据，但是我们有很多其它语言的数据，类似中文、英语等等；图像识别的是医疗图像，数据很少，但是普通的image很多；文本分析上，需要分析的文件是某个很specific的domain，数据很少，但是从网络上可以找到很多文本数据。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylarcntzlj20pd0i97bl.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylarinetsj20nz0djdkp.jpg" alt=""></p>
+<h3 id="Transfer-Learning-Overview"><a href="#Transfer-Learning-Overview" class="headerlink" title="Transfer Learning - Overview"></a>Transfer Learning - Overview</h3><p>Target data是跟现在考虑的task直接相关的，source data跟我们现在考虑的task没有直接的关系。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylarque4ej20oj0elwha.jpg" alt=""></p>
+<h3 id="Model-Fine-tuning"><a href="#Model-Fine-tuning" class="headerlink" title="Model Fine-tuning"></a>Model Fine-tuning</h3><p><img src="https://ws1.sinaimg.cn/large/d1566b02ly1fylas9pcewj20ob0fntby.jpg" alt=""></p>
+<p>如果target data的量特别少，少到只有几个example，这时候叫做one-shot learning。</p>
+<p>训练的时候，先用source data训练出一个model，然后用target data去fine-tune这个model。其实就相当于把source data训练出的model当作当前model的初始值，然后在用target data训练。</p>
+<p>训练的时候有很多小技巧，比如Conservative Training和Layer Transfer。</p>
+<h4 id="Conservative-Training"><a href="#Conservative-Training" class="headerlink" title="Conservative Training"></a>Conservative Training</h4><p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylb8hemyij20nr0e7764.jpg" alt=""></p>
+<p>为了避免target data在fine-tune模型时造成过拟合，要增加约束，即增加正则化项，希望同一笔data经过fine-tune前后两个模型的output越接近越好，或两个模型的参数越接近越好。</p>
+<h4 id="Layer-Transfer"><a href="#Layer-Transfer" class="headerlink" title="Layer Transfer"></a>Layer Transfer</h4><p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylbc14z45j20pt0fpmyy.jpg" alt=""></p>
+<p>把Source data训练好的模型中的某些layer直接copy过来，用target data训练剩下的layer。这样的好处是，target data只需要训练较少的参数，避免了过拟合。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylbkd9tkgj20pl0cttd5.jpg" alt=""></p>
+<p>在不同的task上，需要被transfer的layer往往是不一样的。比如在语音识别上，通常copy最后几层，重新训练前几层。这是因为语音识别神经网络前几层是识别语者的发音方式，后几层是识别，后几层与语者没有关系。在图像识别上，通常copy前面几层，重新训练后面几层。这是因为图像识别神经网络的前几层是识别有没有基本的几何结构，因此可以transfer，而后几层往往学到的比较抽象，无法transfer。所以，哪些layer要被transfer是case by case的。特别是运用之妙，存乎一心。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylbr576pvj20p50hgdl0.jpg" alt=""></p>
+<p>Image在Layer Transfer上的实验，出自Bengio在NIPS2014的paper。把ImageNet分成Source、Target两部分，横轴代表Layer Transfer时copy几个layer（0个代表没有Layer Transfer，是Baseline），纵轴是Top-1 accuracy。曲线4表明，前面几个layer是可以共用的。曲线5表明，Layer Transfer + Fine-tuning 在所有case下，Top-1 accuracy均有提高。这一结果的惊人之处在于，这里的target data已经非常多（ImageNet的一半），但是再加上Source data（ImageNet的另一半）仍然有所帮助。曲线2表示，如果用target domain训练出一个模型，fix住前几个layer，再用target domain训练后几个layer，结果可能坏掉，因为训练的时候，前面的layer和后面的layer其实是要互相搭配的。曲线3表明，在曲线2基础上fine-tune，结果会恢复。 </p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02ly1fylbv3an02j20q90hajv2.jpg" alt=""></p>
+<p>红色线是上上图中的曲线4。黄色线表示，如果source和target比较没有关系（比如把所有自然界的图片当做source，所有人工的图片当做target），那么transfer效果会掉很多，但只copy前几个layer影响是比较小的。这意味着，就算是source domain和target domain是非常不一样的，一边是自然的东西，一边是人造的东西，在neural network第一个layer，它们做的事情很有可能是一样的。绿色线表示，如果前几个layer的参数是random的，结果会烂掉。</p>
+<h3 id="Multitask-Learning"><a href="#Multitask-Learning" class="headerlink" title="Multitask Learning"></a>Multitask Learning</h3><p>Multitask Learning 与 Fine-tuning 的区别在于， Fine-tuning 在意的是在target domain上做得好不好，不介意fine-tune 之后在source domain上结果坏掉。而在Multitask Learning 上，同时在意在target domain和source domain上都做得好不好。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylc2zjmnoj20mz0ebdhd.jpg" alt=""></p>
+<p>左边的网络结构——假设两个不同的task，它们用的是同样的feature，比如，都做影像辨识，只是影像辨识的class不一样，就可以learn一个neural network，input就是两个不同task同样的feature，但是中间会分叉出来，一部分的network，它的output是task A的答案，一部分network的output是task B的答案。前提是两个task有共通性，然后则可以共用前面几个layer，同时使用task A和task B的数据去同时训练前几个layer，所以前面几个layer是用比较多的数据训练的，可能有比较好的performance。 </p>
+<p>右边的网络结构——假设两种不同的task，不同的input都用不同的neural network，把它transform到同一个domain上面去，在用一个domain上再应用不同的neural network，一条路做task A，一条路做task B，中间可能有某几个layer是share的。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylcdegycqj20oe0i541d.jpg" alt=""></p>
+<p>Multitask Learning的一个成功例子是多语言的语音识别，可以训练一个模型同时识别多国语言。翻译的时候也可以做同样的事情，可以把中翻英、中翻日的两个model一起训练。目前在语音的发现是，几乎所有的语言都可以transfer，曾经有人收集了十几种语言，两两之间做transfer，每个case都有进步，哪怕语言之间不是很像。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylcjl8gc3j20ny0etmyx.jpg" alt=""></p>
+<p>蓝线表示，没有transfer learning时汉语识别的结果。黄线表示，用欧洲语言做Transfer learning的结果。在相同汉语训练数据下，使用transfer learning的效果要更好一些。如果有做transfer learning的话，只需要二分之一以下的数据就可以跟原来有两倍的数据做的一样好。</p>
+<h3 id="Progressive-Neural-Networks"><a href="#Progressive-Neural-Networks" class="headerlink" title="Progressive Neural Networks"></a>Progressive Neural Networks</h3><p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylcs1tq3tj20nm0e1wfy.jpg" alt=""></p>
+<p>如果两个task很不相关，却又做了transfer，效果可能是负面的。有人提出了Progressive Neural Network，使得两个task即使无关，做transfer效果也不会比不做更差。 </p>
+<p>Progressive Neural Network的做法是训练好第一个模型后，第一个模型的参数就fix住。训练第2个模型时，每一个hidden layer都会去接前面第一个模型的某一个hidden layer的输出。在训练的时候，它的好处是就算Task 1、Task2非常的不像，也不会影响Task 2的performance，最糟的情况，就跟自己训练的performance是差不多的。Task 3会同时从Task 1和Task 2的hidden layer得到信息。</p>
+<h3 id="Domain-adversarial-training"><a href="#Domain-adversarial-training" class="headerlink" title="Domain-adversarial training"></a>Domain-adversarial training</h3><h4 id="Task-description"><a href="#Task-description" class="headerlink" title="Task description"></a>Task description</h4><p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylczkf583j20nb0dutb0.jpg" alt=""></p>
+<p>source data是MNIST的image，是有label的，target data是MNIST-M的image，是没有label的。通常情况下，我们把source data看作training data，target data看作testing data，有一个问题是training data和testing data是非常mismatch的。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fyldb6d16mj20qa0dntgw.jpg" alt=""></p>
+<p>Neural Network前面几层可以看做在抽feature，我们会发现不同domain 的feature完全不一样，蓝色点是MNIST, 红色点是MNIST-M（均为t-SNE降维后）。后面几层可以看做在做分类，虽然可以把蓝色点分得很好，但是对红色点却无能为力。 </p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fyldg05qxyj20pm0f1wm0.jpg" alt=""></p>
+<p>所以，希望feature extractor可以把domain的特性去除掉，把不同domain的feature都混在一起。做法是在feature extractor后面接一个domain classifier，它的架构类似GAN。不过在GAN中Generator要产生一张Image来骗过Discriminator，这件事很难，但在Domain-adversarial training中要骗过domain classifier很简单，有一个solution是不管什么input, feature extractor的output都是0，就可以骗过domain classifier。所以只训练domain classifier是不够的，要给feature extractor增加任务的难度。 </p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fyldkfi36ij20qe0fctcj.jpg" alt=""></p>
+<p>feature extractor不仅要骗过domain classifier，还要让label predictor做得好。不只把domain的特性消掉，对这个任务来讲还要保留digit的特性。三个network其实是一个大型的neural network，是个“各怀鬼胎”的neural network，Label predict想要把class的分类正确率做的越高越好，Domain classifier想要正确的预测一个image属于哪个domain，Feature extractor要做的是同时提高Label predict的正确率，又同时最小化Domain classifier的正确率。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fyldl2ozi6j20q50fbjvv.jpg" alt=""></p>
+<p>Feature extractor要如何“陷害”队友domain classifier呢？只要加一个gradient reversal layer就行。Back propagation时feature extractor做与domain classifier的要求相反的事情，domain classifier要某个值上升，feature extractor就让那个值下降。由于domain classifier看不到input image，所以最后会输掉，无法分辨feature extractor抽出的feature来自哪个domain。但是domain classifier应该要奋力挣扎，否则不能把feature extractor逼到极限，不能把domain information去除掉。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fyldyu8091j20px0fen54.jpg" alt=""></p>
+<p>paper中给出的实验结果。source only指的是，只用source data训练模型，然后测试target data。这种方法的效果是比较差的。 proposed approach指的是Domain-adversarial training, 效果有很好的提高。 train on target指的是，直接拿target domain 的 data 训练，是performance的up-bound.</p>
+<h3 id="Zero-shot-Learning"><a href="#Zero-shot-Learning" class="headerlink" title="Zero-shot Learning"></a>Zero-shot Learning</h3><p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fyleiq4fcnj20nm0dsafv.jpg" alt=""></p>
+<p>这个问题的定义更加严格一些，是不同的task。例如，source data中有猫狗的图片，没有羊驼的图片，而target data中是羊驼的图片。那训练出的模型能认出羊驼吗？语音上常遇到Zero-shot Learning的问题，若把每个word都当做一个class，那么training的时候与testing的时候就可能会看到不同的词汇。解决办法是，不去识别一段声音属于哪个word，而是识别一段声音属于哪个音素，然后根据人的知识建立一个音素和词汇关系的词典，这样就算有一些word是没有出现在training data里面的，只要在建好的词典里出现过，model就可以正确处理这个问题。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylf0q92gbj20ob0dydj5.jpg" alt=""></p>
+<p>在图像上，做法是把图像的类用attributes表示，如图中的database，attributes要足够丰富让每个类有独一无二的attributes。在training时，不直接识别图像所属类别，而是识别图像具备什么attributes。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02ly1fylf2k4j3jj20oh0c5jtt.jpg" alt=""></p>
+<p>在testing的时候，就算来了一张没见过的类中的image，输出是attributes，查表就知道与output attributes最接近的类。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylf3xe74dj20ou0hpag1.jpg" alt=""></p>
+<p>有时attributes很复杂，可以做attribute embedding.。把training data中每张image都变成embedding space上的一个点，把所有attributes也都变成embedding space上的一个点。图中的$g$与$f$都可以是神经网络，训练时希望$g$与$f$越接近越好，测试时，如果有一张没有看过的image，看image的attribute经embedding之后与哪个attributes最像，那个attributes对应的class就是image所属的class。（图中$f(y^3)$应改为$f(x^3)$）</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylf9si3q8j20oe0hh79q.jpg" alt=""></p>
+<p>有时候，我们不知道每一个动物对应的attribute是什么。这时候可以借用word embedding，把attributes换成 word vector。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylfhdyth8j20ol0e1mzp.jpg" alt=""></p>
+<p>上面的目标函数是有问题的，因为它只考虑了同一个pair在embedding之后尽可能接近，没有考虑不同pair在embedding之后尽可能拉开，所以可能会把所有的$x^n$,$y^n$都投到同一点。应改为图片中第二行的目标函数。</p>
+<p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylflu8bgpj20o60dtwi8.jpg" alt=""></p>
+<p>Zero-shot Learning的一个更简单方法，叫Convex Combination of Semantic Embedding, 不需要training。</p>
+<p>把一张图input进neural network里，输出0.5几率lion，0.5几率tiger，然后用1:1的比例混合lion和tiger的word vector，再看哪一个word的word vector跟混合的结果最接近，就是liger。</p>
+<h3 id="Self-taught-learning"><a href="#Self-taught-learning" class="headerlink" title="Self-taught learning"></a>Self-taught learning</h3><p><img src="https://ws1.sinaimg.cn/large/d1566b02gy1fylfywrgqmj20qk0bcgsn.jpg" alt=""></p>
+<p>如果现在source data够多，那么可以学习一个feature extractor，然后用这个feature extractor在target data上抽feature。</p>
+<p><em>如果本博文对您有帮助，可以<a href="https://blueschang.github.io/donate/">赞助</a>支持一波博主~</em></p>
+</div><div class="recommended_posts"><h3>推荐阅读</h3><li><a href="https://blueschang.github.io/2018/12/26/「李宏毅机器学习」学习笔记-Unsupervised Learning - Deep Generative Model Part II/" target="_blank">「李宏毅机器学习」学习笔记-Unsupervised Learning - Deep Generative Model (Part II)</a></li><li><a href="https://blueschang.github.io/2018/12/26/「李宏毅机器学习」学习笔记-Unsupervised Learning - Deep Generative Model Part I/" target="_blank">「李宏毅机器学习」学习笔记-Unsupervised Learning - Deep Generative Model (Part I)</a></li><li><a href="https://blueschang.github.io/2018/12/26/「李宏毅机器学习」学习笔记-Unsupervised Learning - Deep Auto-encoder/" target="_blank">「李宏毅机器学习」学习笔记-Unsupervised Learning - Deep Auto-encoder</a></li><li><a href="https://blueschang.github.io/2018/12/25/「李宏毅机器学习」学习笔记-Unsupervised Learning - Neighbor Embedding/" target="_blank">「李宏毅机器学习」学习笔记-Unsupervised Learning - Neighbor Embedding</a></li></div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>BluesChang</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/2018/12/27/「李宏毅机器学习」学习笔记-Unsupervised Learning - Transfer Learning/">https://blueschang.github.io/2018/12/27/「李宏毅机器学习」学习笔记-Unsupervised Learning - Transfer Learning/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a> 许可协议。转载请注明出处！</li></ul></div><br><div class="tags"><a href="/tags/李宏毅-机器学习/">李宏毅 机器学习</a></div><div class="post-nav"><a class="next" href="/2018/12/26/「李宏毅机器学习」学习笔记-Unsupervised Learning - Deep Generative Model Part II/">「李宏毅机器学习」学习笔记-Unsupervised Learning - Deep Generative Model (Part II)</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论（请确保 Disqus 可以正常加载）</button></div><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'https://blueschang.github.io/2018/12/27/「李宏毅机器学习」学习笔记-Unsupervised Learning - Transfer Learning/';
+    this.page.identifier = '2018/12/27/「李宏毅机器学习」学习笔记-Unsupervised Learning - Transfer Learning/';
+    this.page.title = '「李宏毅机器学习」学习笔记-Transfer Learning';
+  };</script><script type="text/javascript" id="disqus-lazy-load-script">$.ajax({
+url: 'https://disqus.com/next/config.json',
+timeout: 2500,
+type: 'GET',
+success: function(){
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//bluecode-1.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+  $('.disqus_click_btn').css('display', 'none');
+},
+error: function() {
+  $('.disqus_click_btn').css('display', 'block');
+}
+});</script><script type="text/javascript" id="disqus-click-load">$('.btn_click_load').click(() => {  //click to load comments
+    (() => { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//bluecode-1.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    $('.disqus_click_btn').css('display','none');
+});</script><script type="text/javascript" id="disqus-count-script">$(function() {
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', '//disqus.com/next/config.json', true);
+     xhr.timeout = 2500;
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4 && xhr.status === 200) {
+         $('.post-meta .post-comments-count').show();
+         var s = document.createElement('script');
+         s.id = 'dsq-count-scr';
+         s.src = 'https://bluecode-1.disqus.com/count.js';
+         s.async = true;
+         (document.head || document.body).appendChild(s);
+       }
+     };
+     xhr.ontimeout = function () { xhr.abort(); };
+     xhr.send(null);
+   });
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://blueschang.github.io"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/">机器学习</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Hexo-Github-博客/" style="font-size: 15px;">Hexo Github 博客</a> <a href="/tags/李宏毅-机器学习/" style="font-size: 15px;">李宏毅 机器学习</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/12/27/「李宏毅机器学习」学习笔记-Unsupervised Learning - Transfer Learning/">「李宏毅机器学习」学习笔记-Transfer Learning</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/26/「李宏毅机器学习」学习笔记-Unsupervised Learning - Deep Generative Model Part II/">「李宏毅机器学习」学习笔记-Unsupervised Learning - Deep Generative Model (Part II)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/26/「李宏毅机器学习」学习笔记-Unsupervised Learning - Deep Generative Model Part I/">「李宏毅机器学习」学习笔记-Unsupervised Learning - Deep Generative Model (Part I)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/26/「李宏毅机器学习」学习笔记-Unsupervised Learning - Deep Auto-encoder/">「李宏毅机器学习」学习笔记-Unsupervised Learning - Deep Auto-encoder</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/25/「李宏毅机器学习」学习笔记-Unsupervised Learning - Neighbor Embedding/">「李宏毅机器学习」学习笔记-Unsupervised Learning - Neighbor Embedding</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/25/「李宏毅机器学习」学习笔记-Unsupervised Learning - Word Embedding/">「李宏毅机器学习」学习笔记-Unsupervised Learning - Word Embedding</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/24/「李宏毅机器学习」学习笔记-Unsupervised Learning - Linear Methods/">「李宏毅机器学习」学习笔记-Unsupervised Learning - Linear Methods</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/20/「李宏毅机器学习」学习笔记-Semi-supervised/">「李宏毅机器学习」学习笔记-Semi-supervised</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/17/「李宏毅机器学习」学习笔记-Why Deep/">「李宏毅机器学习」学习笔记-Why Deep?</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/15/「李宏毅机器学习」学习笔记-Convolutional Neural Network/">「李宏毅机器学习」学习笔记-Convolutional Neural Network</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://toaco.github.io/" title="Jeffrey‘s Blog" target="_blank">Jeffrey‘s Blog</a><ul></ul><a href="https://coder-wen.github.io/" title="coderwen的踩坑日记" target="_blank">coderwen的踩坑日记</a><ul></ul><a href="https://me.csdn.net/taoyafan" title="taoyafan" target="_blank">taoyafan</a><ul></ul><a href="https://smilexnan.github.io/" title="SmileCode" target="_blank">SmileCode</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">BlueCode.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script><script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML" async></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
