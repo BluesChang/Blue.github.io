@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blueschang.github.io/"/>
-  <updated>2018-12-28T09:38:29.000Z</updated>
+  <updated>2019-06-03T07:52:45.000Z</updated>
   <id>https://blueschang.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>「剑指Offer（第二版）」Python3实现</title>
+    <link href="https://blueschang.github.io/2019/06/03/%E3%80%8C%E5%89%91%E6%8C%87Offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89%E3%80%8DPython3%E5%AE%9E%E7%8E%B0/"/>
+    <id>https://blueschang.github.io/2019/06/03/「剑指Offer（第二版）」Python3实现/</id>
+    <published>2019-06-03T06:56:11.000Z</published>
+    <updated>2019-06-03T07:52:45.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="https://blueschang.github.io/categories/Algorithm/"/>
+    
+    
+      <category term="剑指Offer Python Algorithm" scheme="https://blueschang.github.io/tags/%E5%89%91%E6%8C%87Offer-Python-Algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>「李宏毅机器学习」学习笔记-Support Vector Machine (SVM)</title>
@@ -73,7 +99,7 @@
     <link href="https://blueschang.github.io/2018/12/26/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Unsupervised%20Learning%20-%20Deep%20Generative%20Model%20Part%20II/"/>
     <id>https://blueschang.github.io/2018/12/26/「李宏毅机器学习」学习笔记-Unsupervised Learning - Deep Generative Model Part II/</id>
     <published>2018-12-26T06:56:29.000Z</published>
-    <updated>2018-12-26T10:45:16.268Z</updated>
+    <updated>2018-12-26T10:45:16.000Z</updated>
     
     <summary type="html">
     
@@ -99,7 +125,7 @@
     <link href="https://blueschang.github.io/2018/12/26/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Unsupervised%20Learning%20-%20Deep%20Generative%20Model%20Part%20I/"/>
     <id>https://blueschang.github.io/2018/12/26/「李宏毅机器学习」学习笔记-Unsupervised Learning - Deep Generative Model Part I/</id>
     <published>2018-12-26T03:04:20.000Z</published>
-    <updated>2018-12-26T10:45:02.793Z</updated>
+    <updated>2018-12-26T10:45:02.000Z</updated>
     
     <summary type="html">
     
@@ -151,7 +177,7 @@
     <link href="https://blueschang.github.io/2018/12/25/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Unsupervised%20Learning%20-%20Neighbor%20Embedding/"/>
     <id>https://blueschang.github.io/2018/12/25/「李宏毅机器学习」学习笔记-Unsupervised Learning - Neighbor Embedding/</id>
     <published>2018-12-25T04:55:29.000Z</published>
-    <updated>2018-12-25T13:26:07.122Z</updated>
+    <updated>2018-12-25T13:26:07.000Z</updated>
     
     <summary type="html">
     
@@ -177,7 +203,7 @@
     <link href="https://blueschang.github.io/2018/12/25/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Unsupervised%20Learning%20-%20Word%20Embedding/"/>
     <id>https://blueschang.github.io/2018/12/25/「李宏毅机器学习」学习笔记-Unsupervised Learning - Word Embedding/</id>
     <published>2018-12-25T03:13:24.000Z</published>
-    <updated>2018-12-25T06:14:47.856Z</updated>
+    <updated>2018-12-25T06:14:47.000Z</updated>
     
     <summary type="html">
     
@@ -203,7 +229,7 @@
     <link href="https://blueschang.github.io/2018/12/24/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Unsupervised%20Learning%20-%20Linear%20Methods/"/>
     <id>https://blueschang.github.io/2018/12/24/「李宏毅机器学习」学习笔记-Unsupervised Learning - Linear Methods/</id>
     <published>2018-12-24T03:23:09.000Z</published>
-    <updated>2018-12-24T14:49:52.832Z</updated>
+    <updated>2018-12-24T14:49:52.000Z</updated>
     
     <summary type="html">
     
@@ -229,7 +255,7 @@
     <link href="https://blueschang.github.io/2018/12/20/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Semi-supervised/"/>
     <id>https://blueschang.github.io/2018/12/20/「李宏毅机器学习」学习笔记-Semi-supervised/</id>
     <published>2018-12-20T08:36:09.000Z</published>
-    <updated>2018-12-24T06:13:55.107Z</updated>
+    <updated>2018-12-24T06:13:55.000Z</updated>
     
     <summary type="html">
     
@@ -255,7 +281,7 @@
     <link href="https://blueschang.github.io/2018/11/17/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Why%20Deep/"/>
     <id>https://blueschang.github.io/2018/11/17/「李宏毅机器学习」学习笔记-Why Deep/</id>
     <published>2018-11-17T01:03:08.000Z</published>
-    <updated>2018-11-17T02:07:29.866Z</updated>
+    <updated>2018-11-17T02:07:29.000Z</updated>
     
     <summary type="html">
     
@@ -281,7 +307,7 @@
     <link href="https://blueschang.github.io/2018/11/15/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Convolutional%20Neural%20Network/"/>
     <id>https://blueschang.github.io/2018/11/15/「李宏毅机器学习」学习笔记-Convolutional Neural Network/</id>
     <published>2018-11-15T08:37:06.000Z</published>
-    <updated>2018-11-15T11:32:37.812Z</updated>
+    <updated>2018-11-15T11:32:37.000Z</updated>
     
     <summary type="html">
     
@@ -307,7 +333,7 @@
     <link href="https://blueschang.github.io/2018/11/09/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Tips%20for%20Training%20DNN/"/>
     <id>https://blueschang.github.io/2018/11/09/「李宏毅机器学习」学习笔记-Tips for Training DNN/</id>
     <published>2018-11-09T01:29:20.000Z</published>
-    <updated>2018-11-09T11:19:28.661Z</updated>
+    <updated>2018-11-09T11:19:28.000Z</updated>
     
     <summary type="html">
     
@@ -333,7 +359,7 @@
     <link href="https://blueschang.github.io/2018/11/08/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E2%80%9CHello%20world%E2%80%9D%20of%20deep%20learning/"/>
     <id>https://blueschang.github.io/2018/11/08/「李宏毅机器学习」学习笔记-“Hello world” of deep learning/</id>
     <published>2018-11-08T05:34:19.000Z</published>
-    <updated>2018-11-08T06:08:40.804Z</updated>
+    <updated>2018-11-08T06:08:40.000Z</updated>
     
     <summary type="html">
     
@@ -385,7 +411,7 @@
     <link href="https://blueschang.github.io/2018/11/07/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Brief%20Introduction%20of%20Deep%20Learning/"/>
     <id>https://blueschang.github.io/2018/11/07/「李宏毅机器学习」学习笔记-Brief Introduction of Deep Learning/</id>
     <published>2018-11-07T01:07:38.000Z</published>
-    <updated>2018-11-07T08:25:47.703Z</updated>
+    <updated>2018-11-07T08:25:47.000Z</updated>
     
     <summary type="html">
     
@@ -411,7 +437,7 @@
     <link href="https://blueschang.github.io/2018/11/03/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Logistic%20Regression/"/>
     <id>https://blueschang.github.io/2018/11/03/「李宏毅机器学习」学习笔记-Logistic Regression/</id>
     <published>2018-11-03T01:23:40.000Z</published>
-    <updated>2018-11-03T03:01:03.990Z</updated>
+    <updated>2018-11-03T03:01:03.000Z</updated>
     
     <summary type="html">
     
@@ -437,7 +463,7 @@
     <link href="https://blueschang.github.io/2018/11/02/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Classification/"/>
     <id>https://blueschang.github.io/2018/11/02/「李宏毅机器学习」学习笔记-Classification/</id>
     <published>2018-11-02T07:21:32.000Z</published>
-    <updated>2018-11-03T03:01:02.374Z</updated>
+    <updated>2018-11-03T03:01:02.000Z</updated>
     
     <summary type="html">
     
@@ -463,7 +489,7 @@
     <link href="https://blueschang.github.io/2018/10/31/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Gradient%20Descent/"/>
     <id>https://blueschang.github.io/2018/10/31/「李宏毅机器学习」学习笔记-Gradient Descent/</id>
     <published>2018-10-31T08:34:00.000Z</published>
-    <updated>2018-10-31T12:02:18.729Z</updated>
+    <updated>2018-10-31T12:02:18.000Z</updated>
     
     <summary type="html">
     
@@ -489,33 +515,7 @@
     <link href="https://blueschang.github.io/2018/10/30/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Where%20does%20the%20error%20come%20from/"/>
     <id>https://blueschang.github.io/2018/10/30/「李宏毅机器学习」学习笔记-Where does the error come from/</id>
     <published>2018-10-30T09:05:03.000Z</published>
-    <updated>2018-11-02T07:25:55.988Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          
-        
-      
-    
-    </summary>
-    
-      <category term="机器学习" scheme="https://blueschang.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="李宏毅 机器学习" scheme="https://blueschang.github.io/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>「李宏毅机器学习」学习笔记-Regression</title>
-    <link href="https://blueschang.github.io/2018/10/30/%E3%80%8C%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8D%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Regression/"/>
-    <id>https://blueschang.github.io/2018/10/30/「李宏毅机器学习」学习笔记-Regression/</id>
-    <published>2018-10-30T01:34:23.000Z</published>
-    <updated>2018-10-31T12:02:13.961Z</updated>
+    <updated>2018-11-02T07:25:55.000Z</updated>
     
     <summary type="html">
     
